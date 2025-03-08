@@ -2,6 +2,5 @@
   <a href="https://expressjs.com" target="_blank">
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Expressjs.png" width="400" alt="Express.js Logo">
   </a>
+  Une application MEAN (Mongodb, Express, Angular, NodeJS) d'un garage...
 </p>
-
-Une application MEAN (Mongodb, Express, Angular, NodeJS) d'un garage...
