@@ -21,7 +21,7 @@ mongoose.connect(MONGO_URI, {
     .catch(err => console.log(err));
     
 // Routes 
-app.use('/client', require('./routes/clientRoute'));
-app.use('/manager', require('./routes/managerRoute'));
-app.use('/mecanicien', require('./routes/mecanicienRoute'));
+app.use('/user', require('./routes/utilisateurRoute'));
+app.use('/vehicule', require('./routes/vehiculeRoute'));
+app.use('/reparation', require('./routes/reparationRoute'));
 app.listen(PORT, () => console.log(`Serveur démarré sur le port ${PORT}`)); 

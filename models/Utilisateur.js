@@ -3,16 +3,17 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const {SECRET_ACCESS_TOKEN} = require('../config')
 
-const ManagerSchema = new mongoose.Schema({
-    username: { type: String, required: true },
-    password: { type: String, required: true, select: false },
-    nom_prenom : {type: String, required : true}
-
-}, { timestamps: true 
-
+const UtilisateurSchema = new mongoose.Schema({
+  nom: { type: String, required: true },
+  username: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  email: {type: String, required: false},
+  role: { type: String, enum: ['client', 'mécanicien', 'manager'], required: true },
+  createdAt: { type: Date, default: Date.now },
+  photo : {type:String, required:false}
 });
 
-ManagerSchema.pre("save", function (next) {
+UtilisateurSchema.pre("save", function (next) {
     const user = this;
 
     if(!user.isModified("password")) return next();
@@ -28,7 +29,7 @@ ManagerSchema.pre("save", function (next) {
     })
 })
 
-ManagerSchema.methods.generateAccessJWT = function(){
+UtilisateurSchema.methods.generateAccessJWT = function(){
     let payload = {
         id: this._id,
     };
@@ -39,4 +40,4 @@ ManagerSchema.methods.generateAccessJWT = function(){
 }
 
 
-module.exports = mongoose.model('Manager', ManagerSchema);
+module.exports = mongoose.model('User', UtilisateurSchema);

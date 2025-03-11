@@ -1,15 +1,16 @@
 const express = require('express')
 const router = express.Router()
-const Manager = require('../models/Manager')
-const { LoginManager } = require('../controller/Auth')
+const {Log} = require('../controller/Auth');
+const Utilisateur = require('../models/Utilisateur');
 
-router.post('/login', LoginManager);
+router.post('/login', Log);
 
 router.post('/', async (req, res) => {
+    //const {username, password, nom_prenom, telephone, email} = req.body
     try {
-        const manager = new Manager(req.body)
-        await manager.save();
-        res.status(201).json(manager);
+        const user = new Utilisateur(req.body)
+        await user.save();
+        res.status(201).json(user);
     }
     catch (error) {
         res.status(400).json({ message: error.message })
@@ -18,8 +19,8 @@ router.post('/', async (req, res) => {
 
 router.get('/', async (req, res) => {
     try {
-        const manager = await Manager.find();
-        res.json(manager);
+        const user = await Utilisateur.find();
+        res.json(user);
     }
     catch (error) {
         res.status(500).json({ message: error.message });
@@ -28,9 +29,9 @@ router.get('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
     try {
-        const manager = await Manager.findByIdAndUpdate(req.params.id,
+        const user = await Utilisateur.findByIdAndUpdate(req.params.id,
             req.body, { new: true });
-        res.json(manager);
+        res.json(user);
     }
     catch (error) {
         res.status(400).json({ message: error.message });
@@ -39,8 +40,8 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
     try {
-        await Manager.findByIdAndDelete(req.params.id);
-        res.json({ message: "Manager supprimé" });
+        await Utilisateur.findByIdAndDelete(req.params.id);
+        res.json({ message: "Utilisateur supprimé" });
     }
     catch (error) {
         res.status(500).json({ message: error.message });
