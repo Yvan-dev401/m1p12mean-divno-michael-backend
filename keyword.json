@@ -1,0 +1,73 @@
+[
+    {
+      "_id": { "$oid": "64a1b2c3d4e5f6a7b8c9d201" },
+      "motCle": "moteur",
+      "pieces": [
+        {
+          "pieceId": { "$oid": "64a1b2c3d4e5f6a7b8c9d101" },
+          "quantite": 4
+        },
+        {
+          "pieceId": { "$oid": "64a1b2c3d4e5f6a7b8c9d102" }, 
+          "quantite": 4
+        },
+        {
+          "pieceId": { "$oid": "64a1b2c3d4e5f6a7b8c9d107" }, 
+          "quantite": 1
+        }
+      ],
+      "mainOeuvre": 150
+    },
+    {
+      "_id": { "$oid": "64a1b2c3d4e5f6a7b8c9d202" },
+      "motCle": "frein",
+      "pieces": [
+        {
+          "pieceId": { "$oid": "64a1b2c3d4e5f6a7b8c9d104" }, 
+          "quantite": 2
+        },
+        {
+          "pieceId": { "$oid": "64a1b2c3d4e5f6a7b8c9d105" }, 
+          "quantite": 2
+        }
+      ],
+      "mainOeuvre": 100
+    },
+    {
+      "_id": { "$oid": "64a1b2c3d4e5f6a7b8c9d203" },
+      "motCle": "batterie",
+      "pieces": [
+        {
+          "pieceId": { "$oid": "64a1b2c3d4e5f6a7b8c9d106" },
+          "quantite": 1
+        }
+      ],
+      "mainOeuvre": 50
+    },
+    {
+      "_id": { "$oid": "64a1b2c3d4e5f6a7b8c9d204" },
+      "motCle": "vidange",
+      "pieces": [
+        {
+          "pieceId": { "$oid": "64a1b2c3d4e5f6a7b8c9d107" }, 
+          "quantite": 1
+        },
+        {
+          "pieceId": { "$oid": "64a1b2c3d4e5f6a7b8c9d103" }, 
+          "quantite": 1
+        }
+      ],
+      "mainOeuvre": 80
+    },
+    {
+      "_id": { "$oid": "64a1b2c3d4e5f6a7b8c9d205" },
+      "motCle": "pneu",
+      "pieces": [
+        {
+          "pieceId": { "$oid": "64a1b2c3d4e5f6a7b8c9d109" }, 
+          "quantite": 4
+        }
+      ],
+      "mainOeuvre": 120
+    }
+  ]

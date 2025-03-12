@@ -3,13 +3,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const {PORT, MONGO_URI} = require('./config')
 
-console.log("test",PORT)
-
 const app = express();
 
-
-
-// Middleware 
 app.use(cors());
 app.use(express.json());
 
@@ -21,7 +16,9 @@ mongoose.connect(MONGO_URI, {
     .catch(err => console.log(err));
     
 // Routes 
+app.use('/prop', require('./routes/propRoute'))
 app.use('/user', require('./routes/utilisateurRoute'));
 app.use('/vehicule', require('./routes/vehiculeRoute'));
 app.use('/reparation', require('./routes/reparationRoute'));
+app.use('/stock', require('./routes/stockRoute'))
 app.listen(PORT, () => console.log(`Serveur démarré sur le port ${PORT}`)); 
