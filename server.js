@@ -16,7 +16,7 @@ mongoose.connect(MONGO_URI, {
     .catch(err => console.log(err));
     
 // Routes 
-app.use('/prop', require('./routes/propRoute'))
+app.use('/probleme', require('./routes/problemeRoute'))
 app.use('/user', require('./routes/utilisateurRoute'));
 app.use('/vehicule', require('./routes/vehiculeRoute'));
 app.use('/reparation', require('./routes/reparationRoute'));

@@ -1,0 +1,331 @@
+[
+    {
+        "keyword": "bruit frein",
+        "synonyms": ["freins qui grincent", "bruit quand je freine", "freins bruyants"],
+        "diagnosis": "Plaquettes de frein usées ou disques de frein endommagés.",
+        "estimatedCost": 200,
+        "specialite": "freins"
+    },
+    {
+        "keyword": "moteur chauffe",
+        "synonyms": ["surchauffe moteur", "température moteur élevée", "moteur trop chaud"],
+        "diagnosis": "Problème de radiateur, de thermostat ou de niveau de liquide de refroidissement.",
+        "estimatedCost": 300,
+        "specialite": "moteur"
+    },
+    {
+        "keyword": "climatisation ne fonctionne pas",
+        "synonyms": ["air conditionné en panne", "clim ne marche pas", "pas de froid dans l'habitacle"],
+        "diagnosis": "Rechargement du gaz climatisation nécessaire ou compresseur défectueux.",
+        "estimatedCost": 150,
+        "specialite": "climatisation"
+    },
+    {
+        "keyword": "voyant moteur allumé",
+        "synonyms": ["voyant check engine", "voyant panne moteur", "voyant orange allumé"],
+        "diagnosis": "Problème électronique ou mécanique détecté par l'ordinateur de bord. Diagnostic approfondi requis.",
+        "estimatedCost": 100,
+        "specialite": "électronique"
+    },
+    {
+        "keyword": "batterie morte",
+        "synonyms": ["voiture ne démarre pas", "batterie à plat", "problème de démarrage"],
+        "diagnosis": "Batterie à remplacer ou problème d'alternateur.",
+        "estimatedCost": 120,
+        "specialite": "électricité"
+    },
+    {
+        "keyword": "pneu à plat",
+        "synonyms": ["pneu crevé", "pneu dégonflé", "roue à plat"],
+        "diagnosis": "Pneu crevé ou valve défectueuse. Remplacement ou réparation nécessaire.",
+        "estimatedCost": 50,
+        "specialite": "pneus"
+    },
+    {
+        "keyword": "problème de transmission",
+        "synonyms": ["boîte de vitesses défectueuse", "problème d'embrayage", "vitesses difficiles à passer"],
+        "diagnosis": "Problème d'embrayage, de boîte de vitesses ou de fluide de transmission.",
+        "estimatedCost": 500,
+        "specialite": "transmission"
+    },
+    {
+        "keyword": "fuite d'huile",
+        "synonyms": ["huile qui coule", "tache d'huile sous la voiture", "niveau d'huile bas"],
+        "diagnosis": "Joint de culasse défectueux, bouchon de vidange mal serré ou carter endommagé.",
+        "estimatedCost": 250,
+        "specialite": "moteur"
+    },
+    {
+        "keyword": "phare ne fonctionne pas",
+        "synonyms": ["feu avant éteint", "phare grillé", "éclairage défectueux"],
+        "diagnosis": "Ampoule grillée, problème de circuit électrique ou fusible défectueux.",
+        "estimatedCost": 30,
+        "specialite": "électricité"
+    },
+    {
+        "keyword": "direction difficile",
+        "synonyms": ["volant dur à tourner", "problème de direction assistée", "direction lourde"],
+        "diagnosis": "Problème de crémaillère de direction, de pompe hydraulique ou de niveau de liquide de direction.",
+        "estimatedCost": 400,
+        "specialite": "direction"
+    },
+    {
+        "keyword": "suspension bruyante",
+        "synonyms": ["bruit de suspension", "claquement à l'arrière", "amortisseurs usés"],
+        "diagnosis": "Amortisseurs usés, ressorts cassés ou rotules de suspension défectueuses.",
+        "estimatedCost": 350,
+        "specialite": "suspension"
+    },
+    {
+        "keyword": "bruit d'échappement",
+        "synonyms": ["pot d'échappement bruyant", "fuite d'échappement", "échappement qui claque"],
+        "diagnosis": "Trou dans le pot d'échappement, joint défectueux ou catalyseur endommagé.",
+        "estimatedCost": 300,
+        "specialite": "échappement"
+    },
+    {
+        "keyword": "climatisation ne refroidit pas",
+        "synonyms": ["air chaud dans l'habitacle", "clim pas froide", "problème de froid"],
+        "diagnosis": "Niveau de gaz climatisation bas, compresseur défectueux ou problème de circuit électrique.",
+        "estimatedCost": 200,
+        "specialite": "climatisation"
+    },
+    {
+        "keyword": "freins inefficaces",
+        "synonyms": ["pédale de frein molle", "freins qui ne mordent pas", "distance de freinage longue"],
+        "diagnosis": "Plaquettes de frein usées, disques de frein endommagés ou problème de circuit hydraulique.",
+        "estimatedCost": 250,
+        "specialite": "freins"
+    },
+    {
+        "keyword": "problème électrique",
+        "synonyms": ["courant coupé", "panne électrique", "électricité défectueuse"],
+        "diagnosis": "Court-circuit, batterie défectueuse ou alternateur en panne.",
+        "estimatedCost": 180,
+        "specialite": "électricité"
+    },
+    {
+        "keyword": "voiture cale souvent",
+        "synonyms": ["moteur qui cale", "calages fréquents", "problème de ralenti"],
+        "diagnosis": "Bougies d'allumage usées, filtre à carburant bouché ou problème de pompe à carburant.",
+        "estimatedCost": 220,
+        "specialite": "moteur"
+    },
+    {
+        "keyword": "vitre électrique bloquée",
+        "synonyms": ["vitre qui ne monte pas", "vitre qui ne descend pas", "problème de vitre"],
+        "diagnosis": "Moteur de vitre défectueux ou problème de circuit électrique.",
+        "estimatedCost": 120,
+        "specialite": "électricité"
+    },
+    {
+        "keyword": "lave-glace ne fonctionne pas",
+        "synonyms": ["essuie-glaces secs", "pas de liquide lave-glace", "pulvérisation défectueuse"],
+        "diagnosis": "Réservoir vide, pompe défectueuse ou buses bouchées.",
+        "estimatedCost": 40,
+        "specialite": "électricité"
+    },
+    {
+        "keyword": "klaxon ne fonctionne pas",
+        "synonyms": ["avertisseur silencieux", "klaxon muet", "problème de klaxon"],
+        "diagnosis": "Klaxon défectueux ou problème de circuit électrique.",
+        "estimatedCost": 50,
+        "specialite": "électricité"
+    },
+    {
+        "keyword": "ceinture de sécurité bloquée",
+        "synonyms": ["ceinture coincée", "enrouleur défectueux", "problème de ceinture"],
+        "diagnosis": "Enrouleur de ceinture défectueux ou problème mécanique.",
+        "estimatedCost": 100,
+        "specialite": "mécanique"
+    },
+    {
+        "keyword": "voyants tableau de bord allumés",
+        "synonyms": ["voyants d'alerte", "tableau de bord lumineux", "problème de voyants"],
+        "diagnosis": "Problème électronique ou capteur défectueux. Diagnostic approfondi requis.",
+        "estimatedCost": 150,
+        "specialite": "électronique"
+    },
+    {
+        "keyword": "roue voilée",
+        "synonyms": ["roue déformée", "vibration du volant", "problème de roue"],
+        "diagnosis": "Roue endommagée ou déséquilibrée. Réparation ou remplacement nécessaire.",
+        "estimatedCost": 80,
+        "specialite": "pneus"
+    },
+    {
+        "keyword": "pare-brise fissuré",
+        "synonyms": ["vitre fissurée", "impact sur le pare-brise", "problème de pare-brise"],
+        "diagnosis": "Fissure ou impact sur le pare-brise. Réparation ou remplacement nécessaire.",
+        "estimatedCost": 300,
+        "specialite": "carrosserie"
+    },
+    {
+        "keyword": "siège ne bouge pas",
+        "synonyms": ["siège bloqué", "réglage de siège défectueux", "problème de siège"],
+        "diagnosis": "Moteur de réglage de siège défectueux ou problème électrique.",
+        "estimatedCost": 150,
+        "specialite": "électricité"
+    },
+    {
+        "keyword": "problème de démarrage à froid",
+        "synonyms": ["moteur difficile à démarrer", "démarrage lent", "problème de démarrage"],
+        "diagnosis": "Bougies de préchauffage défectueuses ou problème de système d'injection.",
+        "estimatedCost": 200,
+        "specialite": "moteur"
+    },
+    {
+        "keyword": "problème de direction assistée",
+        "synonyms": ["direction lourde", "volant dur", "problème de direction"],
+        "diagnosis": "Pompe de direction assistée défectueuse ou niveau de liquide bas.",
+        "estimatedCost": 350,
+        "specialite": "direction"
+    },
+    {
+        "keyword": "problème de roulement de roue",
+        "synonyms": ["bruit de roulement", "roue qui grince", "problème de roue"],
+        "diagnosis": "Roulement de roue usé ou endommagé. Remplacement nécessaire.",
+        "estimatedCost": 250,
+        "specialite": "pneus"
+    },
+    {
+        "keyword": "problème de turbo",
+        "synonyms": ["manque de puissance", "turbo défectueux", "problème de pression"],
+        "diagnosis": "Turbo défectueux ou problème de circuit d'air.",
+        "estimatedCost": 800,
+        "specialite": "moteur"
+    },
+    {
+        "keyword": "problème de capteur ABS",
+        "synonyms": ["voyant ABS allumé", "freinage défectueux", "problème de freins"],
+        "diagnosis": "Capteur ABS défectueux ou problème de circuit électrique.",
+        "estimatedCost": 150,
+        "specialite": "électronique"
+    },
+    {
+        "keyword": "problème de démarreur",
+        "synonyms": ["voiture ne démarre pas", "cliquetis du démarreur", "problème de démarrage"],
+        "diagnosis": "Démarreur défectueux ou problème de circuit électrique.",
+        "estimatedCost": 200,
+        "specialite": "électricité"
+    },
+    {
+        "keyword": "problème de courroie de distribution",
+        "synonyms": ["bruit de courroie", "courroie usée", "problème de moteur"],
+        "diagnosis": "Courroie de distribution usée ou endommagée. Remplacement urgent nécessaire.",
+        "estimatedCost": 600,
+        "specialite": "moteur"
+    },
+    {
+        "keyword": "problème de pot catalytique",
+        "synonyms": ["voyant échappement allumé", "problème de pollution", "échappement bruyant"],
+        "diagnosis": "Pot catalytique bouché ou endommagé. Remplacement nécessaire.",
+        "estimatedCost": 700,
+        "specialite": "échappement"
+    },
+    {
+        "keyword": "problème de filtre à air",
+        "synonyms": ["moteur qui tousse", "manque de puissance", "problème de moteur"],
+        "diagnosis": "Filtre à air bouché ou sale. Remplacement nécessaire.",
+        "estimatedCost": 30,
+        "specialite": "moteur"
+    },
+    {
+        "keyword": "problème de filtre à carburant",
+        "synonyms": ["moteur qui broute", "problème d'accélération", "moteur qui cale"],
+        "diagnosis": "Filtre à carburant bouché ou endommagé. Remplacement nécessaire.",
+        "estimatedCost": 50,
+        "specialite": "moteur"
+    },
+    {
+        "keyword": "problème de filtre à huile",
+        "synonyms": ["huile sale", "problème de lubrification", "moteur bruyant"],
+        "diagnosis": "Filtre à huile bouché ou endommagé. Remplacement nécessaire.",
+        "estimatedCost": 40,
+        "specialite": "moteur"
+    },
+    {
+        "keyword": "problème de filtre à pollen",
+        "synonyms": ["mauvaise odeur dans l'habitacle", "air vicié", "problème de climatisation"],
+        "diagnosis": "Filtre à pollen bouché ou sale. Remplacement nécessaire.",
+        "estimatedCost": 60,
+        "specialite": "climatisation"
+    },
+    {
+        "keyword": "problème de radiateur",
+        "synonyms": ["fuite de liquide de refroidissement", "moteur qui chauffe", "problème de refroidissement"],
+        "diagnosis": "Radiateur endommagé ou fuite de liquide de refroidissement.",
+        "estimatedCost": 400,
+        "specialite": "moteur"
+    },
+    {
+        "keyword": "problème de ventilateur",
+        "synonyms": ["ventilateur ne fonctionne pas", "moteur qui chauffe", "problème de refroidissement"],
+        "diagnosis": "Ventilateur de radiateur défectueux ou problème de circuit électrique.",
+        "estimatedCost": 150,
+        "specialite": "électricité"
+    },
+    {
+        "keyword": "problème de batterie faible",
+        "synonyms": ["batterie qui ne tient pas la charge", "problème de démarrage", "batterie défectueuse"],
+        "diagnosis": "Batterie faible ou problème de charge. Recharge ou remplacement nécessaire.",
+        "estimatedCost": 120,
+        "specialite": "électricité"
+    },
+    {
+        "keyword": "problème de clignotant",
+        "synonyms": ["clignotant qui ne marche pas", "voyant clignotant défectueux", "problème électrique"],
+        "diagnosis": "Clignotant défectueux ou problème de circuit électrique.",
+        "estimatedCost": 50,
+        "specialite": "électricité"
+    },
+    {
+        "keyword": "problème de rétroviseur",
+        "synonyms": ["rétroviseur cassé", "réglage de rétroviseur défectueux", "problème de visibilité"],
+        "diagnosis": "Rétroviseur endommagé ou problème de réglage.",
+        "estimatedCost": 100,
+        "specialite": "carrosserie"
+    },
+    {
+        "keyword": "problème de hayon",
+        "synonyms": ["hayon bloqué", "ouverture de hayon défectueuse", "problème de hayon"],
+        "diagnosis": "Hayon bloqué ou problème de mécanisme d'ouverture.",
+        "estimatedCost": 200,
+        "specialite": "carrosserie"
+    },
+    {
+        "keyword": "problème de toit ouvrant",
+        "synonyms": ["toit ouvrant bloqué", "problème d'ouverture de toit", "toit qui fuit"],
+        "diagnosis": "Toit ouvrant bloqué ou problème de circuit électrique.",
+        "estimatedCost": 300,
+        "specialite": "électricité"
+    },
+    {
+        "keyword": "problème de verrouillage centralisé",
+        "synonyms": ["portes qui ne se verrouillent pas", "problème de télécommande", "verrouillage défectueux"],
+        "diagnosis": "Problème de verrouillage centralisé ou de télécommande.",
+        "estimatedCost": 150,
+        "specialite": "électricité"
+    },
+    {
+        "keyword": "problème de système audio",
+        "synonyms": ["haut-parleur qui grésille", "pas de son", "problème de radio"],
+        "diagnosis": "Haut-parleur défectueux ou problème de circuit électrique.",
+        "estimatedCost": 100,
+        "specialite": "électricité"
+    },
+    {
+        "keyword": "problème de GPS",
+        "synonyms": ["GPS qui ne fonctionne pas", "carte GPS obsolète", "problème de navigation"],
+        "diagnosis": "GPS défectueux ou problème de mise à jour.",
+        "estimatedCost": 200,
+        "specialite": "électronique"
+    },
+    {
+        "keyword": "problème de caméra de recul",
+        "synonyms": ["vision trouble en arriere"],
+        "diagnosis": "Verifier le camera de recul, ou changer s'il le faut",
+        "estimatedCost":30,
+        "specialite": "électronique"
+    }
+]
