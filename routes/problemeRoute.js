@@ -27,7 +27,6 @@ async function calculerScoresMecaniciens(specialitesRequises) {
     for (const mecanicien of mecaniciens) {
         mecanicien.score = 0; // Réinitialiser le score
         // console.log(mecanicien.specialite)
-        // // Augmenter le score pour chaque spécialité correspondante
         for (const specialite of specialitesRequises) {
             if (mecanicien.specialite.some(s => s === specialite)) {
                 mecanicien.score += 1; // Augmenter le score si une correspondance est trouvée
@@ -71,21 +70,12 @@ router.get('/demande-devis', async (req, res) => {
         return res.status(400).json({ message: "Aucun problème identifié dans la description." });
     }
 
-    console.log("sp",specialitesRequises)
+    // console.log("sp",specialitesRequises)
 
     // Calculer les scores des mécaniciens
     const mecaniciens = await calculerScoresMecaniciens(specialitesRequises);
-    console.log(mecaniciens)
+    // console.log(mecaniciens)
 
-    // // Calculer les probabilités
-    // const mecaniciensAvecProbabilites = calculerProbabilites(mecaniciens);
-
-    // // Assigner la demande
-    // const mecanicienAssigné = assignerDemande(mecaniciensAvecProbabilites);
-
-    // if (!mecanicienAssigné) {
-    //     return res.status(404).json({ message: "Aucun mécanicien disponible pour ce type de problème." });
-    // }
 
     // Créer une nouvelle demande
     // const nouvelleDemande = new Demande({
@@ -102,9 +92,7 @@ router.get('/demande-devis', async (req, res) => {
 
     res.status(201).json({
         message: "Demande soumise avec succès.",
-        // demande: nouvelleDemande,
-        // mecanicienAssigné: mecanicienAssigné.name,
-        // probabilite: mecanicienAssigné.probabilite,
+        mecaniciens: mecaniciens
     });
 });
 
