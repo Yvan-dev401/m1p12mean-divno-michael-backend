@@ -1,9 +1,21 @@
 const express = require('express')
 const router = express.Router()
-const {Log} = require('../controller/Auth');
+const {Log, Logout} = require('../controller/Auth');
 const Utilisateur = require('../models/Utilisateur');
 
 router.post('/login', Log);
+
+router.get('/logout', Logout);
+
+router.get('/:id', async (req, res) => {
+    try {
+        const user = await Utilisateur.findById(req.params.id);
+        res.json(user);
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
 
 router.post('/', async (req, res) => {
     //const {username, password, nom_prenom, telephone, email} = req.body

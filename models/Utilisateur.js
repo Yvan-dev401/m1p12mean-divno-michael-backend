@@ -36,6 +36,8 @@ UtilisateurSchema.pre("save", function (next) {
 UtilisateurSchema.methods.generateAccessJWT = function () {
     let payload = {
         id: this._id,
+        role : this.role,
+        nom : this.nom
     };
 
     return jwt.sign(payload, SECRET_ACCESS_TOKEN, {
