@@ -1,49 +1,48 @@
-const express = require('express')
-const router = express.Router()
-const Vehicle = require('../models/Vehicule')
-
+const express = require('express');
+const router = express.Router();
 
 router.post('/', async (req, res) => {
     try {
         const { marque, modele, annee, plaqueImmatriculation } = req.body;
         const clientId = req.query.user;
 
-        const vehic = new Vehicle({ clientId, marque, modele, annee, plaqueImmatriculation });
-        await vehic.save();
-        res.status(201).json(vehic);
+        const vehic = { clientId, marque, modele, annee, plaqueImmatriculation };
+        const result = await req.db.collection('vehicules').insertOne(vehic);
+        res.status(201).json(result.ops[0]);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
     }
-    catch (error) {
-        res.status(400).json({ message: error.message })
-    }
-})
+});
 
 router.get('/', async (req, res) => {
     try {
-        const vehic = await Vehicle.find();
+        const vehic = await req.db.collection('vehicules').find().toArray();
         res.json(vehic);
-    }
-    catch (error) {
+    } catch (error) {
         res.status(500).json({ message: error.message });
     }
 });
 
 router.put('/:id', async (req, res) => {
     try {
-        const vehic = await Vehicle.findByIdAndUpdate(req.params.id,
-            req.body, { new: true });
-        res.json(vehic);
-    }
-    catch (error) {
+        const { id } = req.params;
+        const result = await req.db.collection('vehicules').findOneAndUpdate(
+            { _id: new require('mongodb').ObjectID(id) },
+            { $set: req.body },
+            { returnOriginal: false }
+        );
+        res.json(result.value);
+    } catch (error) {
         res.status(400).json({ message: error.message });
     }
 });
 
 router.delete('/:id', async (req, res) => {
     try {
-        await Vehicle.findByIdAndDelete(req.params.id);
+        const { id } = req.params;
+        await req.db.collection('vehicules').deleteOne({ _id: new require('mongodb').ObjectID(id) });
         res.json({ message: "Vehicle supprimé" });
-    }
-    catch (error) {
+    } catch (error) {
         res.status(500).json({ message: error.message });
     }
 });

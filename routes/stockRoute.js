@@ -1,47 +1,46 @@
-const express = require('express')
-const router = express.Router()
-const Stock = require('../models/Stock');
+const express = require('express');
+const router = express.Router();
 
 router.post('/', async (req, res) => {
     try {
-        const st = new Stock(req.body)
-        await st.save();
-        res.status(201).json(st);
+        const result = await req.db.collection('stocks').insertOne(req.body);
+        res.status(201).json(result.ops[0]);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
     }
-    catch (error) {
-        res.status(400).json({ message: error.message })
-    }
-})
+});
 
 router.get('/', async (req, res) => {
     try {
-        const st = await Stock.find();
-        res.json(st);
-    }
-    catch (error) {
+        const stocks = await req.db.collection('stocks').find().toArray();
+        res.json(stocks);
+    } catch (error) {
         res.status(500).json({ message: error.message });
     }
 });
 
 router.put('/:id', async (req, res) => {
     try {
-        const st = await Stock.findByIdAndUpdate(req.params.id,
-            req.body, { new: true });
-        res.json(st);
-    }
-    catch (error) {
+        const { id } = req.params;
+        const result = await req.db.collection('stocks').findOneAndUpdate(
+            { _id: new require('mongodb').ObjectID(id) },
+            { $set: req.body },
+            { returnOriginal: false }
+        );
+        res.json(result.value);
+    } catch (error) {
         res.status(400).json({ message: error.message });
     }
 });
 
 router.delete('/:id', async (req, res) => {
     try {
-        await Stock.findByIdAndDelete(req.params.id);
+        const { id } = req.params;
+        await req.db.collection('stocks').deleteOne({ _id: new require('mongodb').ObjectID(id) });
         res.json({ message: "Stock supprimé" });
-    }
-    catch (error) {
+    } catch (error) {
         res.status(500).json({ message: error.message });
     }
-}); 
+});
 
 module.exports = router;
