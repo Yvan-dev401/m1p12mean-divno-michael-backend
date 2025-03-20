@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const {Log, Logout} = require('../controller/Auth');
 const Utilisateur = require('../models/Utilisateur');
-const express = require('express');
+// const express = require('express');
 
 router.post('/login', Log);
 
@@ -21,7 +21,8 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     try {
         const result = await req.db.collection('utilisateurs').insertOne(req.body);
-        res.status(201).json(result.ops[0]);
+        const insertedUser = await req.db.collection('utilisateurs').findOne({ _id: result.insertedId });
+        res.status(201).json(insertedUser);
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
