@@ -5,7 +5,6 @@ const reparationSchema = new mongoose.Schema({
   descriptionProbleme: { type: String, required: true },
   etat: { type: String, enum: ['en attente', 'en cours', 'terminé'], default: 'en attente' },
   mecanicienId: { type: mongoose.Schema.Types.ObjectId, ref: 'Utilisateur' },
-  coutEstime: { type: Number },
   coutFinal: { type: Number },
   dateDebut: { type: Date },
   dateFin: { type: Date },

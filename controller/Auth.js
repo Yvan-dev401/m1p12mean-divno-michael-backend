@@ -4,11 +4,12 @@ async function Log(req, res) {
     const { username } = req.body;
 
     try {
-        const user = await req.db.collection('utilisateurs').findOne({ username });
+        const user = await req.db.collection('users').findOne({ username });
+        console.log(user)
         if (!user) {
             return res.status(401).json({
                 status: "failed",
-                data: [],
+                data: [user],
                 message: "Username n'existe pas"
             });
         }
@@ -18,20 +19,20 @@ async function Log(req, res) {
         if (!isPasswordValid) {
             return res.status(401).json({
                 status: "failed",
-                data: [],
+                data: [user],
                 message: "Diso mot de passe"
             });
         }
 
-        let options = {
-            maxAge: 20 * 60 * 1000,
-            httpOnly: false,
-            secure: false,
-            sameSite: 'lax', // Autorise les cookies pour les requêtes cross-origin
-        };
+        // let options = {
+        //     maxAge: 20 * 60 * 1000,
+        //     httpOnly: false,
+        //     secure: false,
+        //     sameSite: 'lax', // Autorise les cookies pour les requêtes cross-origin
+        // };
 
         const token = generateAccessJWT(user); // Assurez-vous d'avoir une fonction pour générer le JWT
-        res.cookie("SessionID", token, options);
+        res.cookie("SessionID", token);
         res.status(200).json({
             status: "success",
             data: user.role,
@@ -49,14 +50,14 @@ async function Log(req, res) {
 
 async function Logout(req, res) {
     try {
-        const options = {
-            httpOnly: false,
-            secure: false,
-            sameSite: 'lax',
-            path: '/',
-        };
+        // const options = {
+        //     httpOnly: false,
+        //     secure: false,
+        //     sameSite: 'lax',
+        //     path: '/',
+        // };
 
-        res.clearCookie('SessionID', options);
+        res.clearCookie("SessionID");
 
         return res.status(200).json({ st: "yes", message: 'Déconnexion réussie' });
     } catch (error) {

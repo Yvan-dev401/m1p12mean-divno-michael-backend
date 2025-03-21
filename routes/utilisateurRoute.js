@@ -1,22 +1,21 @@
 const express = require('express')
 const router = express.Router()
 const {Log, Logout} = require('../controller/Auth');
-const Utilisateur = require('../models/Utilisateur');
 // const express = require('express');
 
 router.post('/login', Log);
 
 router.get('/logout', Logout);
 
-router.get('/:id', async (req, res) => {
-    try {
-        const user = await Utilisateur.findById(req.params.id);
-        res.json(user);
-    }
-    catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-});
+// router.get('/:id', async (req, res) => {
+//     try {
+//         const user = await Utilisateur.findById(req.params.id);
+//         res.json(user);
+//     }
+//     catch (error) {
+//         res.status(500).json({ message: error.message });
+//     }
+// });
 
 router.post('/', async (req, res) => {
     try {
@@ -43,15 +42,6 @@ router.post('/', async (req, res) => {
         res.status(201).json(result.ops[0]);
     } catch (error) {
         res.status(400).json({ message: error.message });
-    }
-});
-
-router.get('/', async (req, res) => {
-    try {
-        const users = await req.db.collection('utilisateurs').find().toArray();
-        res.json(users);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
     }
 });
 

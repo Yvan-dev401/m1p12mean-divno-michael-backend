@@ -4,6 +4,7 @@ const stockSchema = new mongoose.Schema({
   nomPiece: { type: String, required: true },
   quantiteDisponible: { type: Number, required: true },
   prixUnitaire: { type: Number, required: true },
+  main_d_oeuvre: { type: Number },
   createdAt: { type: Date, default: Date.now },
 });
 

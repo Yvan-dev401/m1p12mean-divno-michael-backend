@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
 
 router.get('/', async (req, res) => {
     try {
-        const vehic = await req.db.collection('vehicules').find().toArray();
+        const vehic = await req.db.collection('vehicles').find().toArray();
         res.json(vehic);
     } catch (error) {
         res.status(500).json({ message: error.message });
