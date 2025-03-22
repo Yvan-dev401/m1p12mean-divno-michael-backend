@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 });
 
 // Routes
-// app.use('/probleme', require('./routes/problemeRoute'));
+app.use('/probleme', require('./routes/problemeRoute'));
 app.use('/devis', require('./routes/devisRoute'));
 app.use('/user', require('./routes/utilisateurRoute'));
 app.use('/vehicule', require('./routes/vehiculeRoute'));

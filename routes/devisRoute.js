@@ -40,7 +40,7 @@ router.get('/devisByReparationID', async (req, res) => {
                 $project: {
                     _id: 1,
                     reparationId: 1,
-                    stockId: 1,
+                    nomPiece: '$stockDetails.nomPiece',
                     etat: 1,
                     prixUnitaire: '$stockDetails.prixUnitaire',
                     main_d_oeuvre: '$stockDetails.main_d_oeuvre'
@@ -50,7 +50,7 @@ router.get('/devisByReparationID', async (req, res) => {
 
         console.log(devis_stock)
 
-        res.json(getDevis(devis_stock));
+        res.json({'details':devis_stock, 'total':getDevis(devis_stock)});
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
