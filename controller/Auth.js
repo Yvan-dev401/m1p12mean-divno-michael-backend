@@ -4,7 +4,7 @@ async function Log(req, res) {
     const { username } = req.body;
 
     try {
-        const user = await req.db.collection('utilisateur').findOne({ username });
+        const user = await req.db.collection('utilisateurs').findOne({ username });
         console.log(user)
         if (!user) {
             return res.status(401).json({
