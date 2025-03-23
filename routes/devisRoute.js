@@ -5,7 +5,8 @@ const {getDevis} = require('../controller/DevisController')
 
 router.post('/', async (req, res) => {
     try {
-        const produits = req.body; 
+        const produits = req.body.items; // Assurez-vous que les données sont extraites correctement
+        console.log('Produits reçus :', produits); // Ajoutez ce log pour vérifier les données reçues
         const db = req.db;
 
         const result = await db.collection('devis').insertMany(produits);
@@ -15,7 +16,31 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.get('/devisByReparationID', async (req, res) => {
+router.get("/", async (req, res) => {
+  try {
+    const devisCollection = req.db?.collection("devis");
+    if (!devisCollection) {
+      return res
+        .status(500)
+        .json({ message: "Connexion à la base de données impossible." });
+    }
+
+    const devis = await devisCollection.find({}).toArray();
+
+    if (!devis || devis.length === 0) {
+      return res.status(404).json({ message: "Aucun devis trouvé." });
+    }
+
+    res.status(200).json(devis);
+    return devis; // Retourner la liste des devis
+  } catch (error) {
+    res.status(500).json({ message: error.message || "Erreur serveur" });
+  }
+});
+
+
+
+/* router.get('/devisByReparationID', async (req, res) => {
     try {
         const devisCollection = req.db.collection('devis');
 
@@ -54,9 +79,9 @@ router.get('/devisByReparationID', async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
-});
+}); */
 
-router.put('/:id', async (req, res) => {
+/* router.put('/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const result = await req.db.collection('devis').findOneAndUpdate(
@@ -68,6 +93,22 @@ router.put('/:id', async (req, res) => {
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
+}); */
+
+router.put("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await req.db
+      .collection("devis")
+      .findOneAndUpdate(
+        { _id: new ObjectId(id) },
+        { $set: req.body },
+        { returnOriginal: false }
+      );
+    res.json(result.value);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
 });
 
 router.delete('/:id', async (req, res) => {
