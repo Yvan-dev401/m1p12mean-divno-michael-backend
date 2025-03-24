@@ -5,8 +5,7 @@ const {getDevis} = require('../controller/DevisController')
 
 router.post('/', async (req, res) => {
     try {
-        const produits = req.body.items; // Assurez-vous que les données sont extraites correctement
-        console.log('Produits reçus :', produits); // Ajoutez ce log pour vérifier les données reçues
+        const produits = req.body.items;
         const db = req.db;
 
         const result = await db.collection('devis').insertMany(produits);
