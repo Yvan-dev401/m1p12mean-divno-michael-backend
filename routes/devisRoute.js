@@ -39,7 +39,7 @@ router.get("/", async (req, res) => {
 
 
 
-/* router.get('/devisByReparationID', async (req, res) => {
+router.get('/devisByReparationID', async (req, res) => {
     try {
         const devisCollection = req.db.collection('devis');
 
@@ -78,7 +78,7 @@ router.get("/", async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
-}); */
+});
 
 /* router.put('/:id', async (req, res) => {
     try {
