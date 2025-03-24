@@ -5,7 +5,9 @@ const {getDevis} = require('../controller/DevisController')
 
 router.post('/', async (req, res) => {
     try {
-        const produits = req.body; 
+
+        const produits = req.body.items; // Assurez-vous que les données sont extraites correctement
+        console.log('Produits reçus :', produits);
         const db = req.db;
 
         const result = await db.collection('devis').insertMany(produits);
@@ -15,11 +17,40 @@ router.post('/', async (req, res) => {
     }
 });
 
+router.get("/", async (req, res) => {
+    try {
+      const devisCollection = req.db?.collection("devis");
+      if (!devisCollection) {
+        return res
+          .status(500)
+          .json({ message: "Connexion à la base de données impossible." });
+      }
+  
+      const devis = await devisCollection.find({}).toArray();
+  
+      if (!devis || devis.length === 0) {
+        return res.status(404).json({ message: "Aucun devis trouvé." });
+      }
+  
+      res.status(200).json(devis);
+      return devis; // Retourner la liste des devis
+    } catch (error) {
+      res.status(500).json({ message: error.message || "Erreur serveur" });
+    }
+  });
+
 router.get('/devisByReparationID', async (req, res) => {
     try {
+        const id = req.query.id;
+    
         const devisCollection = req.db.collection('devis');
-
+    
         const devis_stock = await devisCollection.aggregate([
+            {
+                $match: {
+                    reparationId: id
+                }
+            },
             {
                 $addFields: {
                     stockIdObjectId: { $toObjectId: "$stockId" } 
@@ -43,32 +74,49 @@ router.get('/devisByReparationID', async (req, res) => {
                     nomPiece: '$stockDetails.nomPiece',
                     etat: 1,
                     prixUnitaire: '$stockDetails.prixUnitaire',
-                    main_d_oeuvre: '$stockDetails.main_d_oeuvre'
+                    main_d_oeuvre: '$stockDetails.main_d_oeuvre',
+                    quantite: 1
                 }
             }
         ]).toArray();
-
-        console.log(devis_stock)
-
-        res.json({'details':devis_stock, 'total':getDevis(devis_stock)});
+    
+        console.log(devis_stock);
+    
+        res.json({'details': devis_stock, 'total': getDevis(devis_stock)});
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 });
 
-router.put('/:id', async (req, res) => {
+router.put("/:id", async (req, res) => {
     try {
-        const { id } = req.params;
-        const result = await req.db.collection('devis').findOneAndUpdate(
-            { _id: new require('mongodb').ObjectID(id) },
-            { $set: req.body },
-            { returnOriginal: false }
+      const { id } = req.params;
+      const result = await req.db
+        .collection("devis")
+        .findOneAndUpdate(
+          { _id: new ObjectId(id) },
+          { $set: req.body },
+          { returnOriginal: false }
         );
-        res.json(result.value);
+      res.json(result.value);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+      res.status(400).json({ message: error.message });
     }
 });
+
+// router.put('/:id', async (req, res) => {
+//     try {
+//         const { id } = req.params;
+//         const result = await req.db.collection('devis').findOneAndUpdate(
+//             { _id: new require('mongodb').ObjectID(id) },
+//             { $set: req.body },
+//             { returnOriginal: false }
+//         );
+//         res.json(result.value);
+//     } catch (error) {
+//         res.status(400).json({ message: error.message });
+//     }
+// });
 
 router.delete('/:id', async (req, res) => {
     try {
