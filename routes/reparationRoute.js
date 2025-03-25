@@ -116,7 +116,7 @@ router.get('/', async (req, res) => {
                     dateDebut: 1,
                     etat: 1,
                     descriptionProbleme: 1,
-                    nom: '$detMecanicien.username',
+                    nom: '$detMecanicien.nom',
                     marque: '$detVehicules.marque',
                     modele: '$detVehicules.modele',
                 }
