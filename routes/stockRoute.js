@@ -2,6 +2,18 @@ const express = require('express');
 const router = express.Router();
 
 
+router.post('/stock/nouveau_produit', async (req, res) => {
+    try {
+        const produits = req.body; 
+        const db = req.db;
+
+        const result = await db.collection('stocks').insertOne(produits);
+        res.status(201).json({ message: "Stock initialisé avec succès", result });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+});
+
 router.post('/stock/initialize', async (req, res) => {
     try {
         const produits = req.body; 
@@ -51,6 +63,28 @@ router.get('/', async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
+
+
+// router.get('/count', async (req, res) => {
+//     try {
+//         const stockColl = req.db.collection('stocks');
+//         const result = await stockColl.aggregate([
+//             {
+//                 $group: {
+//                     // _id: null,
+//                     trueCount: { $sum: { $cond: [{ $eq: ["$etat", true] }, 1, 0] } },
+//                     falseCount: { $sum: { $cond: [{ $eq: ["$etat", false] }, 1, 0] } }
+//                 }
+//             }
+//         ]).toArray();
+        
+//         res.json(result[0] || { trueCount: 0, falseCount: 0 });
+//     } catch (error) {
+//         console.error('Erreur:', error);
+//         res.status(500).json({ message: 'Erreur serveur' });
+//     }
+// });
+
 
 router.put('/:id', async (req, res) => {
     try {
