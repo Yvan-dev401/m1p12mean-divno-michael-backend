@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { ObjectId } = require('mongodb');
-const { getDevis } = require('../controller/DevisController')
+const { getDevis } = require('../controller/Utils')
 
 router.post('/', async (req, res) => {
     try {

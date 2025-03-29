@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
+const { ObjectId } = require('mongodb');
+const { getProgression} = require('../controller/Utils')
 
 
 router.post('/stock/nouveau_produit', async (req, res) => {
     try {
-        const produits = req.body; 
+        const produits = req.body;
         const db = req.db;
 
         const result = await db.collection('stocks').insertOne(produits);
@@ -16,13 +18,29 @@ router.post('/stock/nouveau_produit', async (req, res) => {
 
 router.post('/stock/initialize', async (req, res) => {
     try {
-        const produits = req.body; 
+        const produits = req.body;
         const db = req.db;
 
         const result = await db.collection('stocks').insertMany(produits);
         res.status(201).json({ message: "Stock initialisé avec succès", result });
     } catch (error) {
         res.status(400).json({ message: error.message });
+    }
+});
+
+router.get('/progression/:id', async (req, res) => {
+    try {
+        const { id } = req.params;  
+        const db = req.db;
+        const stocks = await db.collection('devis').find({ reparationId: id }).toArray();
+        var progression = 0
+        if(stocks.length > 0){
+            progression = getProgression(stocks)
+        }
+        res.json({"progression" : progression});
+    } catch (error) {
+        console.error('Erreur:', error);
+        res.status(500).json({ message: 'Erreur serveur' });
     }
 });
 
@@ -63,27 +81,6 @@ router.get('/', async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
-
-
-// router.get('/count', async (req, res) => {
-//     try {
-//         const stockColl = req.db.collection('stocks');
-//         const result = await stockColl.aggregate([
-//             {
-//                 $group: {
-//                     // _id: null,
-//                     trueCount: { $sum: { $cond: [{ $eq: ["$etat", true] }, 1, 0] } },
-//                     falseCount: { $sum: { $cond: [{ $eq: ["$etat", false] }, 1, 0] } }
-//                 }
-//             }
-//         ]).toArray();
-        
-//         res.json(result[0] || { trueCount: 0, falseCount: 0 });
-//     } catch (error) {
-//         console.error('Erreur:', error);
-//         res.status(500).json({ message: 'Erreur serveur' });
-//     }
-// });
 
 
 router.put('/:id', async (req, res) => {

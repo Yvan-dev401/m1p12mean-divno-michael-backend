@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const {ObjectId} = require('mongodb');
+const { ObjectId } = require('mongodb');
+const { getProgression } = require('../controller/Utils')
 
 router.get('/repByClientID', async (req, res) => {
     try {
@@ -46,7 +47,7 @@ router.post('/', async (req, res) => {
 
 router.get('/historique', async (req, res) => {
     try {
-        const reparations = await req.db.collection('reparations').find({etat: "terminer"}).toArray();
+        const reparations = await req.db.collection('reparations').find({ etat: "terminer" }).toArray();
         res.json(reparations);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -55,8 +56,8 @@ router.get('/historique', async (req, res) => {
 
 router.get('/:etat', async (req, res) => {
     try {
-        const {etat} = req.params
-        const reparations = await req.db.collection('reparations').find({etat: etat}).toArray();
+        const { etat } = req.params
+        const reparations = await req.db.collection('reparations').find({ etat: etat }).toArray();
         res.json(reparations);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -137,11 +138,51 @@ router.get('/', async (req, res) => {
                     nom: '$detMecanicien.nom',
                     marque: '$detVehicules.marque',
                     modele: '$detVehicules.modele',
+                    _id: 1
                 }
             }
         ]).toArray();
+
+        // const reparationsAvecProgression = await Promise.all(
+        //     reparations.map(async (reparation) => {
+        //         const devis = await req.db.collection('devis')
+        //             .find({ reparationId: reparation._id.toString() })
+        //             .toArray();
+                
+        //         return {
+        //             ...reparation,
+        //             progression: getProgression(devis)
+        //         };
+        //     })
+        // );
+
+        // Récupérer tous les IDs de réparation
+        const repaIds = reparations.map(r => r._id.toString());
+
+        // Récupérer tous les devis correspondants en une seule requête
+        const allDevis = await req.db.collection('devis')
+            .find({ reparationId: { $in: repaIds } })
+            .toArray();
+            
+
+        // Grouper les devis par reparationId
+        const devisByRepa = allDevis.reduce((acc, devis) => {
+            if (!acc[devis.reparationId]) {
+                acc[devis.reparationId] = [];
+            }
+            acc[devis.reparationId].push(devis);
+            return acc;
+        }, {});
+
+        // Ajouter la progression
+        const data = reparations.map(reparation => ({
+            ...reparation,
+            progression: getProgression(devisByRepa[reparation._id])
+        }));
+
+
         // Envoyer la réponse au client
-        res.json(reparations);
+        res.json(data);
     } catch (error) {
         // Gestion des erreurs
         console.error('Erreur lors de la récupération des réparations:', error);
