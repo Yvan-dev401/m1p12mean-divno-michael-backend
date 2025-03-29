@@ -3,7 +3,7 @@ const router = express.Router();
 const { ObjectId } = require('mongodb');
 
 
-router.get('/:repID', async (req, res) => {
+/* router.get('/:repID', async (req, res) => {
     try {
         const { repID } = req.params;
         const db = req.db;
@@ -56,6 +56,50 @@ router.get('/:repID', async (req, res) => {
         }
 
 
+
+    } catch (error) {
+        console.error("Erreur:", error);
+        res.status(500).json({
+            success: false,
+            error: "Erreur serveur",
+            details: error.message
+        });
+    }
+}); */
+
+router.get('/:repID', async (req, res) => {
+    try {
+        const { repID } = req.params;
+        const db = req.db;
+
+        const pieces = await db.collection('devis')
+            .find({ reparationId: repID })
+            .toArray();
+
+        for (const piece of pieces) {
+            await db.collection('stocks').updateOne(
+                { _id: new ObjectId(piece.stockId) },
+                { $inc: { quantiteDisponible: - piece.quantite } }
+            );
+
+            await db.collection('sortie').insertOne({
+                stockId: new ObjectId(piece.stockId),
+                quantite: piece.quantite,
+                date: new Date(),
+            });
+        }
+
+        // Mise à jour de l'état de la réparation
+        await db.collection('reparations').updateOne(
+            { _id: new ObjectId(repID) },
+            { $set: { etat: "Terminé" } }
+        );
+
+        res.status(200).json({
+            success: true,
+            message: "Sortie de stock enregistrée avec succès et réparation terminée",
+            piecesTraitees: pieces.length
+        });
 
     } catch (error) {
         console.error("Erreur:", error);

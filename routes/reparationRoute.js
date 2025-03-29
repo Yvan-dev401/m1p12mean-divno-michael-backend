@@ -16,24 +16,6 @@ router.get('/repByClientID', async (req, res) => {
     }
 });
 
-router.get("/today", async (req, res) => {
-  try {
-    // Obtenir la date d'aujourd'hui au format YYYY-MM-DD
-    const today = new Date().toISOString().split("T")[0];
-
-    const reparations = await req.db
-      .collection("reparations")
-      .find({
-        dateDebut: { $regex: `^${today}` }
-      })
-      .toArray();
-
-    res.status(200).json(reparations);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
-
 // Accéder directement au document inséré en utilisant result.insertedId pour obtenir l'ID du document inséré et ensuite récupérer le document complet si nécessaire.
 router.post('/', async (req, res) => {
     try {
@@ -177,7 +159,7 @@ router.get('/', async (req, res) => {
         // Ajouter la progression
         const data = reparations.map(reparation => ({
             ...reparation,
-            progression: getProgression(devisByRepa[reparation._id])
+            progression: getProgression(devisByRepa[reparation._id] || [])
         }));
 
 
