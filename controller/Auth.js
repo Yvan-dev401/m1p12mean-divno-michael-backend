@@ -50,14 +50,7 @@ async function Log(req, res) {
 
 async function Logout(req, res) {
     try {
-        // const options = {
-        //     httpOnly: false,
-        //     secure: false,
-        //     sameSite: 'lax',
-        //     path: '/',
-        // };
-
-        res.clearCookie("SessionID");
+       res.clearCookie("SessionID");
 
         return res.status(200).json({ st: "yes", message: 'Déconnexion réussie' });
     } catch (error) {
