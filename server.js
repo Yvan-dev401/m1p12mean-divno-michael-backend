@@ -14,7 +14,6 @@ app.use(express.json());
 
 let db;
 
-// Connexion à MongoDB
 // MongoClient.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 MongoClient.connect(MONGO_URI)
   .then((client) => {
