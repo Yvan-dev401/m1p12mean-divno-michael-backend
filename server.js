@@ -43,4 +43,5 @@ app.use('/paiement', require('./routes/paiement'));
 app.use('/statistique', require('./routes/statistique'));
 
 
-app.listen(PORT, () => console.log(`Serveur démarré sur le port ${PORT}`));
+// app.listen(PORT, () => console.log(`Serveur démarré sur le port ${PORT}`));
+app.listen(3000, () => console.log("Server ready on port 3000."));
