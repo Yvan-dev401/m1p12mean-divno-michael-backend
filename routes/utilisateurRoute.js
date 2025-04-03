@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const {Log, Logout} = require('../controller/Auth');
+const bcrypt = require("bcrypt");
 // const express = require('express');
 
 router.post('/login', Log);
@@ -17,7 +18,7 @@ router.get('/logout', Logout);
 //     }
 // });
 
-router.post('/', async (req, res) => {
+/* router.post('/', async (req, res) => {
     try {
         const result = await req.db.collection('utilisateurs').insertOne(req.body);
         const insertedUser = await req.db.collection('utilisateurs').findOne({ _id: result.insertedId });
@@ -25,7 +26,7 @@ router.post('/', async (req, res) => {
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
-});
+}); */
 
 router.get('/', async (req, res) => {
     try {
@@ -36,13 +37,24 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
-    try {
-        const result = await req.db.collection('utilisateurs').insertOne(req.body);
-        res.status(201).json(result.ops[0]);
-    } catch (error) {
-        res.status(400).json({ message: error.message });
+router.post("/", async (req, res) => {
+  try {
+    const user = req.body;
+    const db = req.db;
+
+    // Hachage du mot de passe
+    if (user.password) {
+      const saltRounds = 10;
+      user.password = await bcrypt.hash(user.password, saltRounds);
     }
+
+    const result = await db.collection("utilisateurs").insertOne(user);
+    res
+      .status(201)
+      .json({ message: "Utilisateurs inscrit avec succès" });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
 });
 
 router.put('/:id', async (req, res) => {
