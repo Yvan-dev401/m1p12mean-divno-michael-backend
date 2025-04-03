@@ -92,7 +92,7 @@ router.get('/:repID', async (req, res) => {
         // Mise à jour de l'état de la réparation
         await db.collection('reparations').updateOne(
             { _id: new ObjectId(repID) },
-            { $set: { etat: "Terminé" } }
+            { $set: { etat: "terminé" } }
         );
 
         res.status(200).json({

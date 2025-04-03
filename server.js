@@ -40,6 +40,7 @@ app.use('/sortie', require('./routes/sortieRoute'));
 app.use('/entree', require('./routes/entreeRoute'));
 app.use('/commande', require('./routes/commande'));
 app.use('/paiement', require('./routes/paiement'));
+app.use('/statistique', require('./routes/statistique'));
 
 
 app.listen(PORT, () => console.log(`Serveur démarré sur le port ${PORT}`));
