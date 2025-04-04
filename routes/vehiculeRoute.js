@@ -27,14 +27,13 @@ router.get('/', async (req, res) => {
 
 router.get('/vehi', async (req, res) => {
     try {
-        const data = []
         const vehic = await req.db.collection('vehicules').find().toArray();
-        for(let i=0;i<vehic.length; i++){
-            data.label = vehic[i].marque,
-            data.value = vehic[i]._id
-        }
-        res.json(data)
-    } catch (data) {
+        const data = vehic.map(vehicle => ({
+            label: `${vehicle.marque} | ${vehicle.modele}`,
+            value: vehicle._id.toString()
+        }));
+        res.json(data);
+    } catch (error) {
         res.status(500).json({ message: error.message });
     }
 });
@@ -42,12 +41,11 @@ router.get('/vehi', async (req, res) => {
 router.put('/:id', async (req, res) => {
     try {
         const { id } = req.params;
+        const objectId = new ObjectId(id);
         const result = await req.db.collection('vehicules').findOneAndUpdate(
-            { _id: new require('mongodb').ObjectID(id) },
-            { $set: req.body },
-            { returnOriginal: false }
+            { _id: objectId },
+            { $set: req.body }
         );
-        //console.log(req.body)
         res.json(result.value);
     } catch (error) {
         res.status(400).json({ message: error.message });
@@ -57,9 +55,17 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        console.log(id)
-        await req.db.collection('vehicules').deleteOne({ _id: new require('mongodb').ObjectID(id) });
-        res.json({ message: "Vehicle supprimé" });
+        const objectId = new ObjectId(id);
+        const counRep = await req.db.collection('reparations').countDocuments({ vehiculeId: id });
+        console.log(counRep)
+        if (counRep > 0 ) {
+            return res.status(400).json({ 
+                message: "no" 
+            });
+        }
+        const result = await req.db.collection('vehicules').deleteOne({ _id: objectId });
+        res.json({ message: "Véhicule supprimé avec succès" });
+
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

@@ -73,7 +73,7 @@ router.get('/', async (req, res) => {
         const collection = db.collection('reparations');
 
         // Définir les états possibles
-        const defaultEtats = ["pret", "en attente", "en cours", "terminé", "annulé"];
+        const defaultEtats = ["Pret", "En attente", "En cours", "Terminé", "Annulé"];
 
         const pipeline = [
             {

@@ -29,13 +29,14 @@ router.post('/', async (req, res) => {
 
 router.get('/historique', async (req, res) => {
     try {
-        const reparations = await req.db.collection('reparations').find({ etat: "terminer" }).toArray();
+        const reparations = await req.db.collection('reparations')
+            .find({ etat: { $in: ["Terminé", "Annulé"] } }) // $in pour "OU"
+            .toArray();
         res.json(reparations);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 });
-
 router.get('/:etat', async (req, res) => {
     try {
         const { etat } = req.params
