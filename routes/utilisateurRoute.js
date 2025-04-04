@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const {Log, Logout} = require('../controller/Auth');
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 // const express = require('express');
 
 router.post('/login', Log);
