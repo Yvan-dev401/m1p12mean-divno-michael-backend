@@ -7,7 +7,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://m1p12mean-divno-michael.vercel.app/",
+    origin: "https://m1p12mean-divmic.vercel.app/",
     credentials: true,
   })
 );
