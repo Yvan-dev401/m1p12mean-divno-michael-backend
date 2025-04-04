@@ -32,7 +32,11 @@ async function Log(req, res) {
         // };
 
         const token = generateAccessJWT(user); // Assurez-vous d'avoir une fonction pour générer le JWT
-        res.cookie("SessionID", token);
+        res.cookie("SessionID", token, {
+          httpOnly: true, // Empêche l'accès depuis le JS côté client
+          secure: true, // Nécessaire si ton site est en HTTPS (Render l'est par défaut)
+          sameSite: "None", // Autorise l'envoi du cookie entre domaines différents
+        });
         res.status(200).json({
             status: "success",
             data: user.role,
