@@ -35,7 +35,7 @@ async function Log(req, res) {
         res.cookie("SessionID", token, {
           httpOnly: true, // Empêche l'accès depuis le JS côté client
           secure: true, // Nécessaire si ton site est en HTTPS (Render l'est par défaut)
-          sameSite: "None", // Autorise l'envoi du cookie entre domaines différents
+          sameSite: "none", // Autorise l'envoi du cookie entre domaines différents
         });
         res.status(200).json({
             status: "success",

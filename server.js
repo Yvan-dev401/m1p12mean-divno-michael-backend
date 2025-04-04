@@ -5,10 +5,12 @@ const { PORT, MONGO_URI } = require('./config');
 
 const app = express();
 
-app.use(cors({
-    origin: 'http://localhost:4200', 
-    credentials: true 
-  }));
+app.use(
+  cors({
+    origin: "https://m1p12mean-divno-michael.vercel.app/",
+    credentials: true,
+  })
+);
   
 app.use(express.json());
 
