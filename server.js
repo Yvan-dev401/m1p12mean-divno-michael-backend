@@ -5,16 +5,17 @@ const { PORT, MONGO_URI } = require('./config');
 
 const app = express();
 
-app.use(cors({
-    origin: 'http://localhost:4200', 
-    credentials: true 
-  }));
+app.use(
+  cors({
+    origin: "https://m1p12mean-divmic.vercel.app/",
+    credentials: true,
+  })
+);
   
 app.use(express.json());
 
 let db;
 
-// Connexion à MongoDB
 // MongoClient.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 MongoClient.connect(MONGO_URI)
   .then((client) => {
