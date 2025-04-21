@@ -33,10 +33,14 @@ async function Log(req, res) {
 
         const token = generateAccessJWT(user); // Assurez-vous d'avoir une fonction pour générer le JWT
         res.cookie("SessionID", token, {
-          httpOnly: false, // Empêche l'accès depuis le JS côté client
-          secure: true, // Nécessaire si ton site est en HTTPS (Render l'est par défaut)
-          sameSite: "none", // Autorise l'envoi du cookie entre domaines différents
-        });
+            httpOnly: false,
+            secure: true,
+            sameSite: 'none',
+            domain: 'm1p12mean-divno-michael-backend.onrender.com',
+            path: '/',
+            maxAge: 86400000    
+        })
+
         res.status(200).json({
             status: "success",
             data: user.role,
