@@ -32,7 +32,7 @@ app.use((req, res, next) => {
 
 // Routes
 app.get('/test', (req, res) => {
-  res.json("mety amzay");
+  res.json("mbola ndray");
 });
 app.use('/probleme', require('./routes/problemeRoute'));
 app.use('/devis', require('./routes/devisRoute'));

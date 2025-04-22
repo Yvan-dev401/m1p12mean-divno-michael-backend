@@ -32,14 +32,14 @@ async function Log(req, res) {
         // };
 
         const token = generateAccessJWT(user); // Assurez-vous d'avoir une fonction pour générer le JWT
-        res.cookie("SessionID", token, {
-            httpOnly: true,
-            secure: true,
-            sameSite: 'none',
-            //domain: 'm1p12mean-divno-michael-backend.onrender.com',
-            path: '/',
-            maxAge: 86400000    
-        })
+        // res.cookie("SessionID", token, {
+        //     httpOnly: true,
+        //     secure: true,
+        //     sameSite: 'none',
+        //     //domain: 'm1p12mean-divno-michael-backend.onrender.com',
+        //     path: '/',
+        //     maxAge: 86400000    
+        // })
 
         res.status(200).json({
             status: "success",
