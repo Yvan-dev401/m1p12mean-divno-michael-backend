@@ -33,7 +33,7 @@ async function Log(req, res) {
 
         const token = generateAccessJWT(user); // Assurez-vous d'avoir une fonction pour générer le JWT
         res.cookie("SessionID", token, {
-            httpOnly: true,
+            httpOnly: false,
             secure: true,
             sameSite: 'none',
             //domain: 'm1p12mean-divno-michael-backend.onrender.com',
