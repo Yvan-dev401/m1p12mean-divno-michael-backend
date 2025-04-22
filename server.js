@@ -5,12 +5,13 @@ const { PORT, MONGO_URI } = require('./config');
 
 const app = express();
 
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://m1p12mean-divmic.vercel.app");
-  res.header("Access-Control-Allow-Credentials", "true");
-  res.header("Access-Control-Expose-Headers", "Set-Cookie"); // Autorise la lecture des cookies
-  next();
-});
+const corsOptions = {
+  origin: "https://m1p12mean-divmic.vercel.app",
+  credentials: true,
+  exposedHeaders: ["Set-Cookie"] // Équivalent à Access-Control-Expose-Headers
+};
+
+app.use(cors(corsOptions));
   
 app.use(express.json());
 
@@ -32,7 +33,7 @@ app.use((req, res, next) => {
 
 // Routes
 app.get('/test', (req, res) => {
-  res.json("mety ndray");
+  res.json("mety ee");
 });
 app.use('/probleme', require('./routes/problemeRoute'));
 app.use('/devis', require('./routes/devisRoute'));
