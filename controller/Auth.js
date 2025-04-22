@@ -36,7 +36,7 @@ async function Log(req, res) {
             httpOnly: true,
             secure: true,
             sameSite: 'none',
-            domain: 'm1p12mean-divno-michael-backend.onrender.com',
+            //domain: 'm1p12mean-divno-michael-backend.onrender.com',
             path: '/',
             maxAge: 86400000    
         })
